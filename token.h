@@ -3,6 +3,7 @@
 #include <string>
 
 enum TokenType {
+	TK_EMPTY,
 	TK_ID, // Identifier Token
 	// Data Types
 	TK_STR,
@@ -40,15 +41,15 @@ enum TokenType {
 };
 
 class Token {
-public:
-	Token(TokenType type, const std::string& value);
-	TokenType getType() const;
-	std::string getValue() const;
-	void show() const;
+	public:
+		Token(TokenType type, const std::string& value);
+		TokenType getType() const;
+		std::string getValue() const;
+		void show() const;
 
-private:
-	TokenType type;
-	std::string value;
+	private:
+		TokenType type;
+		std::string value;
 };
 
 #endif
