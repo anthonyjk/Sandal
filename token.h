@@ -9,9 +9,14 @@ enum TokenType {
 	TK_INT,
 	TK_FLOAT,
 	// Operators
-	TK_ASSIGN, // Assigns (var <- int)
+	TK_ASSIGN, // Assigns (var <= int)
 	TK_EQUALS, // Assigns (var = int)
 	TK_POINT, // Operates (data => mean)
+	TK_PLUS,
+	TK_MINUS,
+	TK_MULTIPLY,
+	TK_DIVIDE,
+	TK_COLON,
 	// Conditions
 	TK_IF,
 	TK_FOR,
@@ -21,6 +26,14 @@ enum TokenType {
 	TK_GREATER,
 	TK_IS, // var is 5
 	TK_ISNT, // var isnt 5
+	// Syntax
+		// Parens & Similar
+	TK_LPAREN,
+	TK_RPAREN,
+	TK_LBRACKET,
+	TK_RBRACKET,
+	TK_LCURLY,
+	TK_RCURLY,
 	// Other
 	TK_NEWLINE,
 	TK_EOF
@@ -29,8 +42,8 @@ enum TokenType {
 class Token {
 public:
 	Token(TokenType type, const std::string& value);
-	TokenType type() const;
-	std::string value() const;
+	TokenType getType() const;
+	std::string getValue() const;
 	void show() const;
 
 private:

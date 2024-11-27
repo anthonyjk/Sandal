@@ -1,0 +1,5 @@
+run(n => 10:20) {
+	display("possible string")
+
+	display((n + 2) * 2)
+}

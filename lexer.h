@@ -14,17 +14,23 @@ private:
 public:
 	Lexer(const std::string& code);
 
-	void displayTokens() const;
+	void displayCode() const;
 
-	std::vector<Token> lex();
+	void displayTokens() const;
 
 	void advance();
 
-	void skipEmpty();
+	void devance();
 
-	void skipLine();
+	std::vector<Token> lex();
 
-	Token getNextToken();
+	Token nextToken();
+
+	std::string collectString();
+
+	std::string collectIdentifier();
+
+	std::string collectNumeric();
 };
 
 #endif
