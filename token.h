@@ -36,7 +36,7 @@ enum TokenType {
 	TK_LCURLY,
 	TK_RCURLY,
 	// Other
-	TK_NEWLINE,
+	TK_SEMI, // Semi-colon
 	TK_EOF
 };
 

@@ -1,6 +1,7 @@
 #include "lexer.h"
 #include "token.h"
 #include "syntaxNode.h"
+#include "parser.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,17 +13,19 @@ int main() {
 	std::string code;
 	while (std::getline(codefile, str)) {
 		code += str;
-		code.push_back('\n');
 	}
 
-	//std::cout << code <<std::endl;
+	std::cout << code <<std::endl;
 
-	//Lexer myLexer(code);
+	Lexer myLexer(code);
 
-	//myLexer.lex();
+	std::vector<Token> tokens = myLexer.lex();
 
-	//myLexer.displayTokens();
+	//Parser myParser(tokens);
 
+	myLexer.displayTokens();
+
+	/*
 	Token seven = Token(TokenType::TK_INT, "7"); 
 
 	Token times = Token(TokenType::TK_MULTIPLY, "*");
@@ -42,7 +45,7 @@ int main() {
 
 	syn.getOperator().show();
 
-	std::cout << syn.n_children();
+	std::cout << syn.n_children();*/
 
 	return 0;
 }

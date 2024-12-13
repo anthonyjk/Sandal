@@ -7,7 +7,6 @@
 Node::Node(NodeType type) : type(type), children({}) {
 }
 
-
 // Node Assignment
 void Node::createChild(Node child) {
 	children.push_back(child);

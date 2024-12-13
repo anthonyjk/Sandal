@@ -7,7 +7,8 @@
 enum NodeType {
 	EXPRESSION, // Math expression, e.g. x + y
 	FUNCTION, // Function call, e.g. func()
-	DECLARATIVE, // Variable declaration, e.g. x <= int 15
+	DECLARATIVE, // Variable declaration, e.g. x <= 15
+	IDENTIFIER, // For Vars
 	LITERAL, // Stand-alone string or number, e.g. "String" or 7
 	CONDITIONAL, // Condition, such as an if statement
 	BLOCK // Code block

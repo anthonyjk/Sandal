@@ -26,6 +26,8 @@ std::vector<Token> Lexer::lex() {
 		advance();
 	}
 
+	tokens.push_back(Token(TokenType::TK_EOF, ""));
+
 	return tokens;
 }
 
@@ -40,14 +42,16 @@ void Lexer::devance() {
 Token Lexer::nextToken() {
 
 	// Skip empty space
-	while(code[pointer] == '\t' || code[pointer] == ' ') {
+	while(code[pointer] == '\t' || code[pointer] == ' ' || code[pointer] == '\n' || code[pointer] == '\r' || code[pointer] == '\v' || code[pointer] == '\f') {
 		advance();
 	}
 	char ch = code[pointer];
 
+	//std::cout << ch << std::endl;
+
 	switch(ch) {
-		case '\n':
-			return Token(TokenType::TK_NEWLINE, "\n");
+		case ';':
+			return Token(TokenType::TK_SEMI, ";");
 			break;
 		case '(':
 			return Token(TokenType::TK_LPAREN, "(");
@@ -85,17 +89,30 @@ Token Lexer::nextToken() {
 		case '/':
 			return Token(TokenType::TK_DIVIDE, "/");
 			break;
+		case '<':
+			if (pointer + 1 < code.length()) {
+				std::string expr = code.substr(pointer, 2);
+
+				if(expr == "<=") {
+					advance();
+					return Token(TokenType::TK_ASSIGN, "<=");
+				} else {
+					return Token(TokenType::TK_LESS, "<");
+				}
+			} else {
+				return Token(TokenType::TK_LESS, "<");
+			}
+			break;
+		case '>':
+			return Token(TokenType::TK_GREATER, ">");
+			break;
 		case '=':
 			// Check for type
 			if (pointer + 1 < code.length()) {
 				std::string expr = code.substr(pointer, 2);
 
 				// Prevent issues
-
-				if(expr == "<=") {
-					advance();
-					return Token(TokenType::TK_ASSIGN, "<=");
-				} else if (expr == "=>") {
+				 if (expr == "=>") {
 					advance();
 					return Token(TokenType::TK_POINT, "=>");
 				} else {
