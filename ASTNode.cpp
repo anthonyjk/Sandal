@@ -2,7 +2,7 @@
 #include <vector>
 #include <stdexcept>
 #include <iostream>
-#include "syntaxNode.h"
+#include "ASTNode.h"
 
 Node::Node(NodeType type) : type(type), children({}) {
 }

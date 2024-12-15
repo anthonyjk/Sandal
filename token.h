@@ -10,9 +10,9 @@ enum TokenType {
 	TK_INT,
 	TK_FLOAT,
 	// Operators
-	TK_ASSIGN, // Assigns (var <= int)
+	TK_ASSIGN, // Assigns (var <- int)
 	TK_EQUALS, // Assigns (var = int)
-	TK_POINT, // Operates (data => mean)
+	TK_POINT, // Operates (data -> mean)
 	TK_PLUS,
 	TK_MINUS,
 	TK_MULTIPLY,

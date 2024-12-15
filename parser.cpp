@@ -1,6 +1,6 @@
 #include "token.h"
 #include "parser.h"
-#include "syntaxNode.h"
+#include "ASTNode.h"
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -10,7 +10,7 @@ Parser::Parser(const std::vector<Token>& tokens) : tokens(tokens), nodes({}), po
 }
 
 std::vector<Node> Parser::parse() {
-	while(pointer < tokens.length()) {
+	while(pointer < tokens.size()) {
 		nodes.push_back(readLine());
 	}
 }
@@ -20,35 +20,45 @@ void Parser::advance() {
 }
 
 Node Parser::readLine() {
-	while(tokens[pointer].getType() != TK_SEMI) {
-		switch(tokens[pointer].getType()) {
+	return expression();
+}
 
-			case TK_ID:
+Node Parser::expression() {
+	Node node = term();
+	if(tokens[pointer].getType() == TK_PLUS || tokens[pointer].getType() == TK_MINUS){
+		Node op = Node(NodeType::EXPRESSION);
+		op.setOperator(tokens[pointer].getType())
+		op.createChild(node); //left
+		op.createChild(term());
+		return op;
+	}
+	return node;
+}
 
-				// Assignment with ID
-				if(tokens[pointer + 1].getType() == TK_ASSIGN) {
-					if(tokens[pointer + 2].getType() == TK_INT || tokens[pointer + 2].getType() == TK_STR ) {
-						Node left = Node(NodeType::IDENTIFIER);
-						left.assignValue(tokens[pointer].getValue());
+Node Parser::term() {
+	Node node = factor();
+	if(tokens[pointer].getType() == TK_MULTIPLY || tokens[pointer].getType() == TK_DIVIDE) {
+		Node op = Node(NodeType::EXPRESSION);
+		op.setOperator(tokens[pointer].getType())
+		op.createChild(node); // left
+		op.createChild(factor()); // right
+		return op;
+	}
+	return node;
+}
 
-						Node right = Node(NodeType::LITERAL);
-						right.assignValue(tokens[pointer + 2].getValue());
-
-						Node center = Node(NodeType::DECLARATIVE);
-						center.createChild(left);
-						center.createChild(right);
-
-						return center; // UPDATE CODE TO ACCOUNT FOR EXPR SUCH AS: x <= 5 + 5 + 5 + 5 + 5;
-					}
-				}
-
-				// Other with ID
-				//pass
-				break;
-
-			case TK_ASSIGN:
-				break;
-		}
+Node Parser::factor() {
+	Token token = tokens[pointer];
+	if(token.getType() == TK_INT) {
 		advance();
+		Node node = Node(NodeType::LITERAL);
+		node.assignValue(token.getValue());
+		return node;
+	} else if(token.getType() == TK_LPAREN) {
+		advance();
+		Node node = expression();
+		advance();
+	} else {
+		// error
 	}
 }

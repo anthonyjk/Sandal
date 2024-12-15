@@ -1,6 +1,6 @@
 #include "lexer.h"
 #include "token.h"
-#include "syntaxNode.h"
+#include "ASTNode.h"
 #include "parser.h"
 #include <iostream>
 #include <string>

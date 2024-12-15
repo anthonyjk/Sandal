@@ -93,9 +93,9 @@ Token Lexer::nextToken() {
 			if (pointer + 1 < code.length()) {
 				std::string expr = code.substr(pointer, 2);
 
-				if(expr == "<=") {
+				if(expr == "<-") {
 					advance();
-					return Token(TokenType::TK_ASSIGN, "<=");
+					return Token(TokenType::TK_ASSIGN, "<-");
 				} else {
 					return Token(TokenType::TK_LESS, "<");
 				}

@@ -1,6 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
-#include "syntaxNode.h"
+#include "ASTNode.h"
 #include "token.h"
 #include <vector>
 #include <string>
@@ -19,5 +19,11 @@ public:
     void advance();
 
     Node readLine();
+
+    Node expression();
+
+    Node term();
+
+    Node factor();
 };
 #endif

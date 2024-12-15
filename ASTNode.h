@@ -1,5 +1,5 @@
-#ifndef SYNTAXNODE_H
-#define SYNTAXNODE_H
+#ifndef ASTNODE_H
+#define ASTNODE_H
 #include <string>
 #include <vector>
 #include "token.h"
